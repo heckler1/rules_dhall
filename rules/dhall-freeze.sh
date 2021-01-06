@@ -87,4 +87,6 @@ else
   "${DHALL_BIN}" freeze --all <<< "${input}"
 fi
 
+debug_log "$(env)"
+
 cat <<< "${input}"
