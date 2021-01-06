@@ -5,7 +5,7 @@ load("@bazel_skylib//lib:shell.bzl", "shell")
 def _dhall_freeze_impl(ctx):
     """A rule that outputs frozen dhall"""
     entrypoint = ctx.attr.entrypoint.files.to_list()[0]
-    output_env = ctx.attr.output_env.files.to_list()[0]
+    output_env = ctx.actions.declare_file(ctx.label.name + ".env")
 
     substitutions = {
         "@@ENTRYPOINT@@": entrypoint.path,
@@ -60,7 +60,6 @@ dhall_freeze = rule(
     executable = True,
     attrs = {
         "entrypoint": attr.label(mandatory = True, allow_single_file = True),
-        "output_env": attr.label(default = Label("//:freeze.env"), allow_single_file = True),
         "srcs": attr.label_list(allow_files = [".dhall"]),
         "deps": attr.label_list(),
         "data": attr.label_list(allow_files = True),
