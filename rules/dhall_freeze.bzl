@@ -10,7 +10,7 @@ def _dhall_freeze_impl(ctx):
     substitutions = {
         "@@ENTRYPOINT@@": entrypoint.path,
         "@@DHALL_BIN@@": ctx.attr._dhall[DefaultInfo].files_to_run.executable.short_path,
-        "@@OUTPUT_ENV@@": ctx.attr.output_env.files.to_list()[0],
+        "@@OUTPUT_ENV@@": output_env.path,
     }
 
     inputs = []
