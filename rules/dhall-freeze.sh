@@ -17,6 +17,7 @@ DEBUG=@@DEBUG@@
 DHALL_BIN=$(realpath -s @@DHALL_BIN@@)
 ENTRYPOINT=@@ENTRYPOINT@@
 DEPS=@@DEPS@@
+OUTPUT_ENV=@@OUTPUT_ENV@@
 export XDG_CACHE_HOME="$PWD/.cache"
 
 IMPORTHASH=()
@@ -88,5 +89,7 @@ else
 fi
 
 debug_log "$(env)"
+
+env > "${OUTPUT_ENV}"
 
 cat <<< "${input}"
