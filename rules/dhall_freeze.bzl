@@ -7,6 +7,12 @@ def _dhall_freeze_impl(ctx):
     entrypoint = ctx.attr.entrypoint.files.to_list()[0]
     output_env = ctx.actions.declare_file(ctx.label.name + ".env")
 
+    # Create the output file for later writing
+    ctx.actions.write(
+            output = output_env,
+            content = "test",
+        )
+
     substitutions = {
         "@@ENTRYPOINT@@": entrypoint.path,
         "@@DHALL_BIN@@": ctx.attr._dhall[DefaultInfo].files_to_run.executable.short_path,
