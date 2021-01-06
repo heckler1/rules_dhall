@@ -56,7 +56,7 @@ def _dhall_freeze_impl(ctx):
         is_executable = True,
     )
 
-    freeze_runfiles = ctx.runfiles(files = inputs + [output_env])
+    freeze_runfiles = ctx.runfiles(files = inputs)
     freeze_runfiles = freeze_runfiles.merge(ctx.attr._dhall[DefaultInfo].default_runfiles)
 
     return [DefaultInfo(runfiles = freeze_runfiles, files = depset([output_env]))]
